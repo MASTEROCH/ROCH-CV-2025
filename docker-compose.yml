@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: datum-empire-db
+    environment:
+      POSTGRES_DB: datum_empire
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - datum-empire
+
+  redis:
+    image: redis:7-alpine
+    container_name: datum-empire-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - datum-empire
+
+  api:
+    build:
+      context: ./packages/api
+      dockerfile: Dockerfile
+    container_name: datum-empire-api
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/datum_empire
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: your-super-secret-jwt-key
+      TELEGRAM_BOT_TOKEN: your-telegram-bot-token
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - datum-empire
+
+  web:
+    build:
+      context: ./packages/web
+      dockerfile: Dockerfile
+    container_name: datum-empire-web
+    ports:
+      - "5173:5173"
+    networks:
+      - datum-empire
+
+volumes:
+  postgres_data:
+
+networks:
+  datum-empire:
+    driver: bridge
