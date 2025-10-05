@@ -1,0 +1,11 @@
+fastapi==0.115.2
+uvicorn[standard]==0.30.6
+SQLAlchemy==2.0.35
+pydantic==2.9.2
+python-dotenv==1.0.1
+alembic==1.13.2
+passlib[bcrypt]==1.7.4
+psycopg2-binary==2.9.9
+orjson==3.10.7
+starlette-exporter==0.23.0
+loguru==0.7.2

@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: datum-empire
+    env: docker
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://datum-empire.onrender.com, http://localhost:5173
+      - key: ENV
+        value: production
