@@ -1,0 +1,86 @@
+{
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "cancel": "Отмена",
+    "confirm": "Подтвердить",
+    "save": "Сохранить",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "close": "Закрыть",
+    "back": "Назад",
+    "next": "Далее",
+    "previous": "Предыдущий",
+    "retry": "Повторить"
+  },
+  "navigation": {
+    "home": "Главная",
+    "inventory": "Инвентарь",
+    "tasks": "Задачи",
+    "network": "Сеть",
+    "shop": "Магазин",
+    "converter": "Конвертер",
+    "earlyAccess": "Ранний доступ",
+    "tonInfo": "Информация о TON"
+  },
+  "auth": {
+    "login": "Войти",
+    "logout": "Выйти",
+    "welcome": "Добро пожаловать в Datum Empire",
+    "loginWithTelegram": "Войти через Telegram"
+  },
+  "balance": {
+    "coins": "Монеты",
+    "tickets": "Билеты",
+    "tonGame": "TON Игра",
+    "totalSpins": "Всего спинов"
+  },
+  "roulette": {
+    "title": "Рулетка",
+    "spin": "Крутить",
+    "autoSpin": "Авто-крутка",
+    "stopAutoSpin": "Остановить авто-крутку",
+    "moreChance": "Больше шансов",
+    "history": "История",
+    "win": "Вы выиграли!",
+    "lose": "Попробуйте еще раз!",
+    "reward": "Награда"
+  },
+  "tasks": {
+    "title": "Задачи",
+    "daily": "Ежедневные",
+    "weekly": "Еженедельные",
+    "special": "Особые",
+    "completed": "Выполнено",
+    "claim": "Получить награду",
+    "claimed": "Получено"
+  },
+  "shop": {
+    "title": "Магазин",
+    "buy": "Купить",
+    "purchased": "Куплено",
+    "insufficientFunds": "Недостаточно средств"
+  },
+  "friends": {
+    "title": "Друзья",
+    "addFriend": "Добавить друга",
+    "referralCode": "Реферальный код",
+    "referralLink": "Реферальная ссылка",
+    "totalReferrals": "Всего рефералов",
+    "totalEarnings": "Общий доход"
+  },
+  "converter": {
+    "title": "Конвертер",
+    "coinsToTickets": "Монеты в билеты",
+    "ticketsToCoins": "Билеты в монеты",
+    "convert": "Конвертировать",
+    "rate": "Курс"
+  },
+  "streak": {
+    "title": "Серия",
+    "days": "Дней",
+    "bonus": "Бонус",
+    "claim": "Получить бонус серии"
+  }
+}

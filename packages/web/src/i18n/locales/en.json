@@ -1,0 +1,86 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "retry": "Retry"
+  },
+  "navigation": {
+    "home": "Home",
+    "inventory": "Inventory",
+    "tasks": "Tasks",
+    "network": "Network",
+    "shop": "Shop",
+    "converter": "Converter",
+    "earlyAccess": "Early Access",
+    "tonInfo": "TON Info"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "welcome": "Welcome to Datum Empire",
+    "loginWithTelegram": "Login with Telegram"
+  },
+  "balance": {
+    "coins": "Coins",
+    "tickets": "Tickets",
+    "tonGame": "TON Game",
+    "totalSpins": "Total Spins"
+  },
+  "roulette": {
+    "title": "Roulette",
+    "spin": "Spin",
+    "autoSpin": "Auto Spin",
+    "stopAutoSpin": "Stop Auto Spin",
+    "moreChance": "More Chance",
+    "history": "History",
+    "win": "You Win!",
+    "lose": "Try Again!",
+    "reward": "Reward"
+  },
+  "tasks": {
+    "title": "Tasks",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "special": "Special",
+    "completed": "Completed",
+    "claim": "Claim Reward",
+    "claimed": "Claimed"
+  },
+  "shop": {
+    "title": "Shop",
+    "buy": "Buy",
+    "purchased": "Purchased",
+    "insufficientFunds": "Insufficient Funds"
+  },
+  "friends": {
+    "title": "Friends",
+    "addFriend": "Add Friend",
+    "referralCode": "Referral Code",
+    "referralLink": "Referral Link",
+    "totalReferrals": "Total Referrals",
+    "totalEarnings": "Total Earnings"
+  },
+  "converter": {
+    "title": "Converter",
+    "coinsToTickets": "Coins to Tickets",
+    "ticketsToCoins": "Tickets to Coins",
+    "convert": "Convert",
+    "rate": "Rate"
+  },
+  "streak": {
+    "title": "Streak",
+    "days": "Days",
+    "bonus": "Bonus",
+    "claim": "Claim Streak Bonus"
+  }
+}

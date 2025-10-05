@@ -1,0 +1,202 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  telegramId  String   @unique
+  username    String?
+  firstName   String?
+  lastName    String?
+  languageCode String?
+  isPremium   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  balance     Balance?
+  tickets     Ticket[]
+  tasks       UserTask[]
+  friends     Friend[] @relation("UserFriends")
+  friendsOf   Friend[] @relation("FriendOf")
+  purchases   Purchase[]
+  spins       Spin[]
+  streaks     Streak[]
+  referrals   User[]   @relation("Referrals")
+  referredBy  User?    @relation("Referrals", fields: [referredById], references: [id])
+  referredById String?
+
+  @@map("users")
+}
+
+model Balance {
+  id         String @id @default(cuid())
+  userId     String @unique
+  coins      Int    @default(0)
+  tickets    Int    @default(0)
+  tonGame    Int    @default(0)
+  totalSpins Int    @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("balances")
+}
+
+model Ticket {
+  id        String    @id @default(cuid())
+  userId    String
+  type      TicketType
+  amount    Int
+  expiresAt DateTime?
+  claimedAt DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("tickets")
+}
+
+model UserTask {
+  id          String   @id @default(cuid())
+  userId      String
+  taskId      String
+  completed   Boolean  @default(false)
+  completedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  task Task @relation(fields: [taskId], references: [id])
+
+  @@unique([userId, taskId])
+  @@map("user_tasks")
+}
+
+model Task {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  type        TaskType
+  reward      Int
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  userTasks UserTask[]
+
+  @@map("tasks")
+}
+
+model Friend {
+  id        String   @id @default(cuid())
+  userId    String
+  friendId  String
+  createdAt DateTime @default(now())
+
+  user   User @relation("UserFriends", fields: [userId], references: [id], onDelete: Cascade)
+  friend User @relation("FriendOf", fields: [friendId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, friendId])
+  @@map("friends")
+}
+
+model ShopItem {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  type        ShopItemType
+  price       Int
+  currency    Currency
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  purchases Purchase[]
+
+  @@map("shop_items")
+}
+
+model Purchase {
+  id        String   @id @default(cuid())
+  userId    String
+  itemId    String
+  amount    Int
+  totalCost Int
+  createdAt DateTime @default(now())
+
+  user User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  item ShopItem @relation(fields: [itemId], references: [id])
+
+  @@map("purchases")
+}
+
+model Spin {
+  id        String   @id @default(cuid())
+  userId    String
+  result    Int
+  isWin     Boolean
+  reward    Int?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("spins")
+}
+
+model Streak {
+  id        String   @id @default(cuid())
+  userId    String
+  count     Int      @default(0)
+  lastDate  DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("streaks")
+}
+
+model RouletteConfig {
+  id           String @id @default(cuid())
+  segments     Int    @default(8)
+  probabilities Json
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("roulette_configs")
+}
+
+enum TicketType {
+  FREE
+  PURCHASED
+  REWARD
+}
+
+enum TaskType {
+  DAILY
+  WEEKLY
+  SPECIAL
+}
+
+enum ShopItemType {
+  COINS
+  TICKETS
+  STARTER_PACK
+  FREE_BUNDLE
+}
+
+enum Currency {
+  COINS
+  TON
+  STARS
+}

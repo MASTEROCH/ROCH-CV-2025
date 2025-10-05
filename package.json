@@ -1,0 +1,26 @@
+{
+  "name": "datum-empire",
+  "version": "1.0.0",
+  "description": "Datum Empire - Telegram Mini App with Roulette Game",
+  "private": true,
+  "workspaces": [
+    "packages/web",
+    "packages/api"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "cd packages/api && npm run start:dev",
+    "dev:web": "cd packages/web && npm run dev",
+    "build": "npm run build:api && npm run build:web",
+    "build:api": "cd packages/api && npm run build",
+    "build:web": "cd packages/web && npm run build",
+    "start": "cd packages/api && npm run start:prod",
+    "db:generate": "cd packages/api && npx prisma generate",
+    "db:push": "cd packages/api && npx prisma db push",
+    "db:seed": "cd packages/api && npx prisma db seed",
+    "db:studio": "cd packages/api && npx prisma studio"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
