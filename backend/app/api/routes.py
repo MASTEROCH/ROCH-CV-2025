@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from ..core.config import get_settings
 from ..db import models
 from .deps import get_db, get_current_user
+from .admin import router as admin_router
 
 router = APIRouter()
 settings = get_settings()
@@ -200,3 +201,17 @@ def stats_summary(db: Session = Depends(get_db)):
     wau = db.query(models.User).filter(models.User.last_login_at >= now - timedelta(days=7)).count()
     mau = db.query(models.User).filter(models.User.last_login_at >= now - timedelta(days=30)).count()
     return {"users": users, "dau": dau, "wau": wau, "mau": mau}
+
+
+@router.get("/shop/items")
+def shop_items(db: Session = Depends(get_db)):
+    return [
+        {
+            "id": s.id,
+            "item_key": s.item_key,
+            "price_ton": s.price_ton,
+            "price_coins": s.price_coins,
+            "payload": s.payload,
+        }
+        for s in db.query(models.ShopConfig).all()
+    ]

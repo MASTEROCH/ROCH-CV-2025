@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse
 from starlette_exporter import PrometheusMiddleware, handle_metrics
+from fastapi.staticfiles import StaticFiles
 
 from .core.config import get_settings
 from .db.session import engine, SessionLocal
@@ -45,3 +46,15 @@ app.include_router(api_router, prefix="/api")
 @app.get("/")
 def root():
     return {"message": "Datum Empire API", "env": settings.ENV}
+
+
+# Mount static frontend if built exists (prototype)
+try:
+    import os
+    app_dir = os.path.dirname(__file__)
+    static_dir = os.path.join(app_dir, "static")
+    if os.path.isdir(static_dir):
+        app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+except Exception:
+    # static not available; ignore in API-only mode
+    pass
